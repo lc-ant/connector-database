@@ -1,0 +1,24 @@
+name: database
+impl: mongodb
+connectorClass: net.lecousin.ant.connector.database.DatabaseConnector
+stack:
+  java: ${maven.compiler.target}
+  spring-boot: ${spring-boot.version}
+dependencies:
+  mongo:
+    image: mongo
+    supportedTags:
+      - "regexp:^(?:6|7)(?:\\.[0-9]+)*(?:-[a-z0-9]+)?$"
+    exposedPorts:
+      - 27017
+    healthCheck: "echo 'db.runCommand(\"ping\").ok' | mongosh localhost:27017/test --quiet"
+    test:
+      tags:
+        - 6-jammy
+        - 7-jammy
+      output:
+        properties:
+          lc-ant.connector.database.default: "mongodb"
+          lc-ant.connector.database.mongodb.host: "{{host}}"
+          lc-ant.connector.database.mongodb.port: "{{port.27017}}"
+          lc-ant.connector.database.mongodb.database: "test"
