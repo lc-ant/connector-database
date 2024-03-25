@@ -1,0 +1,48 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>net.lecousin.ant.connector</groupId>
+		<artifactId>lc-ant-connector-database-parent-pom</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>lc-ant-connector-database</artifactId>
+
+	<properties>
+		<lc-ant-core-spring-boot.version>0.0.1-SNAPSHOT</lc-ant-core-spring-boot.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>net.lecousin.ant</groupId>
+			<artifactId>lc-ant-core-spring-boot-connector</artifactId>
+			<version>${lc-ant-core-spring-boot.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-commons</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>test-jar</goal>
+						</goals>
+						<configuration>
+							<includes>
+								net/lecousin/ant/connector/database/tests/**/*.*</includes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
