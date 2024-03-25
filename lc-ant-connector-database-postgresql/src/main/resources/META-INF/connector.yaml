@@ -1,0 +1,24 @@
+name: database
+impl: postgresql
+connectorClass: net.lecousin.ant.connector.database.DatabaseConnector
+stack:
+  java: ${maven.compiler.target}
+  spring-boot: ${spring-boot.version}
+dependencies:
+  postgres:
+    image: postgres
+    supportedTags:
+      - "regexp:^(?:14|15|16)(?:\\.[0-9]+)*(?:-[a-z0-9]+)?$"
+    exposedPorts:
+      - 5432
+    test:
+      tags:
+        - 16-alpine
+      input:
+        env:
+          POSTGRES_HOST_AUTH_METHOD: "trust"
+          POSTGRES_DB: "test"
+      output:
+        properties:
+          lc-ant.connector.database.default: "postgresql"
+          lc-ant.connector.database.postgresql.url: "r2dbc:pool:postgresql://postgres@{{host}}:{{port.5432}}/test"
