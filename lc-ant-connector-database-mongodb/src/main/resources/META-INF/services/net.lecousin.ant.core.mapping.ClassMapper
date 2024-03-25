@@ -1,0 +1,2 @@
+net.lecousin.ant.connector.database.mongodb.mappers.ObjectIdToString
+net.lecousin.ant.connector.database.mongodb.mappers.StringToObjectId
